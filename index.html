@@ -3,274 +3,1019 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shivam Singh | Data Analyst Portfolio</title>
+  <title>Shivam Singh | ML Engineer & AI Specialist</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <style>
     :root {
-      --bg-color: #0e1117;
-      --text-color: #f0f0f0;
-      --accent-color: #00bcd4;
-      --section-padding: 60px 20px;
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-tertiary: #16213e;
+      --text-primary: #ffffff;
+      --text-secondary: #e2e8f0;
+      --text-muted: #cbd5e1;
+      --accent-primary: #7c3aed;
+      --accent-secondary: #06b6d4;
+      --accent-tertiary: #f59e0b;
+      --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #06b6d4 50%, #f59e0b 100%);
+      --gradient-secondary: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
+      --gradient-bg: linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e);
+      --shadow-primary: 0 20px 60px rgba(124, 58, 237, 0.3);
+      --shadow-secondary: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.2);
+      --border-radius: 20px;
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    body {
+
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: var(--font-family);
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      position: relative;
     }
-    #tsparticles {
+
+    /* Beautiful Animated Background */
+    body::before {
+      content: '';
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+        linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      z-index: -2;
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 60% 70%, rgba(124, 58, 237, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 30% 30%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+      z-index: -1;
+      animation: backgroundShift 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.1) rotate(1deg); opacity: 0.8; }
+    }
+
+    /* Floating Elements */
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
       z-index: -1;
     }
-    .theme-toggle {
+
+    .floating-element {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 15s infinite linear;
+    }
+
+    .floating-element:nth-child(2n) {
+      background: var(--accent-secondary);
+      animation-duration: 20s;
+    }
+
+    .floating-element:nth-child(3n) {
+      background: var(--accent-tertiary);
+      animation-duration: 25s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+    }
+
+    /* Navigation */
+    .navbar {
       position: fixed;
-      top: 20px; right: 20px;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 15, 35, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       z-index: 1000;
+      padding: 1rem 0;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
-    .theme-toggle button {
-      padding: 10px 15px;
-      background: var(--accent-color);
-      border: none; border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,188,212,0.5);
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
     }
-    header.hero {
-      text-align: center;
-      padding: 100px 20px;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    header.hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      animation: fadeInDown 1s ease-in-out;
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
     }
-    header.hero p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      color: #ccc;
-    }
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      background-color: var(--accent-color);
-      color: #fff;
-      border: none; border-radius: 8px;
+
+    .nav-links a {
+      color: var(--text-secondary);
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s, transform 0.3s;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
     }
+
+    .nav-links a:hover {
+      color: var(--accent-primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      animation: slideInDown 1s ease-out;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: slideInUp 1s ease-out 0.2s both;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      animation: slideInUp 1s ease-out 0.4s both;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: slideInUp 1s ease-out 0.6s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: slideInUp 1s ease-out 0.8s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
     .btn:hover {
-      background-color: #008fa1;
-      transform: scale(1.05);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
     }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: var(--transition);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    /* Sections */
     .section {
-      padding: var(--section-padding);
-      max-width: 1000px;
-      margin: auto;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.15);
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-secondary);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
       opacity: 0;
-      transform: translateY(50px);
+      transition: var(--transition);
+      z-index: -1;
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: var(--shadow-primary), var(--shadow-glow);
+      border-color: rgba(124, 58, 237, 0.4);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
       transition: all 0.8s ease-out;
     }
-    .section.visible {
+
+    .animate-on-scroll.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: var(--accent-color);
-    }
-    .profile-photo {
-      max-width: 200px;
-      display: block;
-      margin: 0 auto 20px auto;
-      border-radius: 12px;
-      filter: grayscale(100%);
-      box-shadow: 0 0 15px rgba(255,255,255,0.15);
-    }
-    .skills-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 15px;
-      list-style: none;
-      padding: 0;
-    }
-    .skills-list li {
-      background: #1f2736;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,188,212,0.1);
-    }
-    .skills-list li i {
-      font-size: 24px;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .project {
-      background: #1a1f2b;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,188,212,0.15);
-      transition: transform 0.3s;
-    }
-    .project:hover {
-      transform: translateY(-5px);
-    }
-    .responsibility-card {
-      background: #1a1f2b;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,188,212,0.15);
-      transition: transform 0.3s;
-    }
-    .responsibility-card:hover {
-      transform: translateY(-5px);
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #1f2736;
-      color: #888;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      
+      .section {
+        padding: 4rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="tsparticles"></div>
-  <div class="theme-toggle">
-    <button onclick="toggleTheme()">Toggle Theme</button>
+  <!-- Floating Elements Background -->
+  <div class="floating-elements">
+    <div class="floating-element" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="floating-element" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="floating-element" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="floating-element" style="left: 40%; animation-delay: 6s;"></div>
+    <div class="floating-element" style="left: 50%; animation-delay: 8s;"></div>
+    <div class="floating-element" style="left: 60%; animation-delay: 10s;"></div>
+    <div class="floating-element" style="left: 70%; animation-delay: 12s;"></div>
+    <div class="floating-element" style="left: 80%; animation-delay: 14s;"></div>
+    <div class="floating-element" style="left: 90%; animation-delay: 16s;"></div>
   </div>
-
-  <header class="hero">
-    <h1>Hi, I'm Shivam Singh</h1>
-    <p id="typing-text">Data Analyst | ML Engineer | Python | SQL | Power BI | Tableau</p>
-    <a href="#projects" class="btn">View Projects</a>
-    <a href="ShivamSinghResume.pdf" class="btn" target="_blank">Download Resume</a>
-  </header>
-
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <img src="profile.jpg" alt="Shivam Singh" class="profile-photo" />
-    <p>I contribute to machine learning and data science projects, working with TensorFlow and Python libraries to design and optimize models. My responsibilities include data preprocessing, building predictive models, and assisting in deploying ML solutions into production pipelines.</p>
-  </section>
-
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <ul class="skills-list">
-      <li><i class="fab fa-python"></i>Python</li>
-      <li><i class="fas fa-database"></i>SQL</li>
-      <li><i class="fas fa-chart-line"></i>Power BI</li>
-      <li><i class="fas fa-chart-pie"></i>Tableau</li>
-      <li><i class="fas fa-eye"></i>Data Visualization</li>
-      <li><i class="fas fa-broom"></i>Data Cleaning</li>
-      <li><i class="fab fa-java"></i>Java</li>
-      <li><i class="fas fa-file-excel"></i>Excel</li>
-      <li><i class="fab fa-tensorflow"></i>TensorFlow</li>
-    </ul>
-  </section>
-
-  <section id="projects" class="section">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>📊 Power BI Dashboard – Netflix & PhonePe</h3>
-      <p>Developed an interactive Power BI dashboard analyzing streaming and transaction data to uncover content preferences and regional insights.</p>
+  
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">Shivam Singh</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    <div class="project">
-      <h3>📈 Tableau Dashboard – Superstore</h3>
-      <p>Designed a dynamic Tableau dashboard to visualize KPIs, filter data by region, and help optimize product performance and sales strategy.</p>
-    </div>
-    <div class="project">
-      <h3>🐍 Python Data Processing</h3>
-      <p>Used Pandas, Seaborn, and Matplotlib to clean, transform, and visualize raw datasets, producing insights that simplified business decisions.</p>
-    </div>
-    <div class="project">
-      <h3>🔗 SQL + Python Integration</h3>
-      <p>Built a seamless end-to-end pipeline from SQL queries to Python visualizations for advanced analytics and reporting.</p>
-    </div>
-  </section>
+  </nav>
 
-  <section id="responsibility" class="section">
-    <h2>Position of Responsibility</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-      <div class="responsibility-card">
-        <h3><i class="fas fa-users-cog"></i> Management (RKGIT) – 2023 to 2026</h3>
-        <p>Managing and leading the technical society with teamwork and coordination.</p>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-robot"></i>
+        <span>Available for ML Engineering Roles</span>
       </div>
-      <div class="responsibility-card">
-        <h3><i class="fas fa-futbol"></i> Football Captain (RKGIT) – 2025 to 2026</h3>
-        <p>Led the college football team with strategy, discipline, and teamwork on and off the field.</p>
+      <h1>Shivam Singh</h1>
+      <div class="hero-subtitle">Machine Learning Engineer & AI Specialist</div>
+      <p class="hero-description">
+        Passionate ML engineer with expertise in building scalable AI solutions, NLP systems, and computer vision applications. 
+        Currently working as ML Intern at Ivistec Partners, developing cutting-edge AI models and pipelines.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">
+          <i class="fas fa-code"></i>
+          View Projects
+        </a>
+        <a href="mailto:shivam6902@gmail.com" class="btn btn-secondary">
+          <i class="fas fa-envelope"></i>
+          Get In Touch
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <i class="fas fa-download"></i>
+          Download Resume
+        </a>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section">
-    <h2>Contact Me</h2>
-    <p>Email: <a href="mailto:shivam6902@gmail.com">shivam6902@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/ShivamSingh200416" target="_blank">ShivamSingh200416</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank">LinkedIn Profile</a></p>
+  <!-- About Section -->
+  <section id="about" class="section animate-on-scroll">
+    <div class="section-header">
+      <div class="section-badge">About Me</div>
+      <h2 class="section-title">Building the Future with AI</h2>
+      <p class="section-description">A dedicated ML engineer passionate about creating intelligent systems that solve real-world problems</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3><i class="fas fa-brain" style="color: var(--accent-primary); margin-right: 0.5rem;"></i>AI & Machine Learning</h3>
+        <p>Specialized in developing end-to-end ML pipelines, from data preprocessing to model deployment. Experienced with scikit-learn, XGBoost, LightGBM, and modern deep learning frameworks.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-language" style="color: var(--accent-secondary); margin-right: 0.5rem;"></i>Natural Language Processing</h3>
+        <p>Built advanced NLP systems including document analyzers, semantic search engines, and conversational AI using Transformers, LangChain, and vector databases.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-eye" style="color: var(--accent-tertiary); margin-right: 0.5rem;"></i>Computer Vision</h3>
+        <p>Developed OCR systems and image processing pipelines using PyTorch, OpenCV, and modern CNN architectures for real-world applications.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fas fa-cloud" style="color: var(--accent-primary); margin-right: 0.5rem;"></i>MLOps & Deployment</h3>
+        <p>Experienced in deploying ML models at scale using cloud platforms, containerization, and building robust production-ready AI systems.</p>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Shivam Singh. All rights reserved.</p>
+  <!-- Experience Section -->
+  <section id="experience" class="section animate-on-scroll">
+    <div class="section-header">
+      <div class="section-badge">Experience</div>
+      <h2 class="section-title">Professional Journey</h2>
+      <p class="section-description">Building cutting-edge AI solutions in the industry</p>
+    </div>
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap;">
+        <div>
+          <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">Machine Learning and AI Intern</h3>
+          <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Ivistec Partners</h4>
+        </div>
+        <span style="background: rgba(124, 58, 237, 0.15); color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(124, 58, 237, 0.3);">05/2025 - Present</span>
+      </div>
+      <ul style="color: var(--text-secondary); line-height: 1.8;">
+        <li>Contributed to AI and machine learning projects, working with <strong>Python ML libraries, NLP, and Hugging Face</strong> for model development</li>
+        <li>Built <strong>RAG pipelines with vector embeddings and LangChain</strong>, implementing OCR and semantic search solutions</li>
+        <li>Trained models on millions of rows of data to ensure scalability and supported deployment into production workflows</li>
+        <li>Enabled <strong>intelligent information retrieval and data-driven decision-making</strong> through advanced AI systems</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section animate-on-scroll">
+    <div class="section-header">
+      <div class="section-badge">Technical Skills</div>
+      <h2 class="section-title">Tech Stack & Expertise</h2>
+      <p class="section-description">Comprehensive toolkit for building modern AI solutions</p>
+    </div>
+    
+    <div style="margin-bottom: 3rem;">
+      <h3 style="color: var(--accent-primary); margin-bottom: 1.5rem; text-align: center;">Programming Languages</h3>
+      <div class="grid-4">
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fab fa-python" style="font-size: 3rem; color: #3776ab; margin-bottom: 1rem;"></i>
+          <h4>Python</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fas fa-database" style="font-size: 3rem; color: #336791; margin-bottom: 1rem;"></i>
+          <h4>SQL</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fab fa-java" style="font-size: 3rem; color: #f89820; margin-bottom: 1rem;"></i>
+          <h4>Java</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fab fa-r-project" style="font-size: 3rem; color: #276dc3; margin-bottom: 1rem;"></i>
+          <h4>R</h4>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 3rem;">
+      <h3 style="color: var(--accent-secondary); margin-bottom: 1.5rem; text-align: center;">ML/AI Frameworks & Libraries</h3>
+      <div class="grid-3">
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--accent-primary); margin-bottom: 1rem;"></i>
+          <h4>Pandas, NumPy, Matplotlib</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fas fa-robot" style="font-size: 2.5rem; color: var(--accent-secondary); margin-bottom: 1rem;"></i>
+          <h4>Scikit-learn, TensorFlow</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fas fa-fire" style="font-size: 2.5rem; color: #ee4c2c; margin-bottom: 1rem;"></i>
+          <h4>PyTorch</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fas fa-language" style="font-size: 2.5rem; color: var(--accent-tertiary); margin-bottom: 1rem;"></i>
+          <h4>Hugging Face Transformers</h4>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.5rem;">
+          <i class="fas fa-link" style="font-size: 2.5rem; color: var(--accent-primary); margin-bottom: 1rem;"></i>
+          <h4>LangChain, OCR, FAISS</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section animate-on-scroll">
+    <div class="section-header">
+      <div class="section-badge">Featured Projects</div>
+      <h2 class="section-title">AI Solutions & Innovations</h2>
+      <p class="section-description">Showcasing cutting-edge machine learning and AI projects</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+          <i class="fas fa-cogs" style="font-size: 1.5rem; color: var(--accent-primary); margin-right: 0.75rem;"></i>
+          <h3>Large-Scale ML Model Training & Pipelines</h3>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Engineered robust end-to-end ML pipelines on datasets exceeding 1 million rows, focusing on scalability and performance using <strong>Scikit-learn, XGBoost, and LightGBM</strong>.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">Scikit-learn</span>
+          <span style="background: rgba(139, 92, 246, 0.1); color: var(--accent-secondary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">XGBoost</span>
+          <span style="background: rgba(6, 182, 212, 0.1); color: var(--accent-tertiary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">LightGBM</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+          <i class="fas fa-file-alt" style="font-size: 1.5rem; color: var(--accent-secondary); margin-right: 0.75rem;"></i>
+          <h3>EZ Smart Assistant (AI Document Analyzer)</h3>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Developed an AI-based NLP assistant capable of parsing PDF/TXT files, generating contextual summaries, and providing intelligent responses using <strong>Transformers, PyPDF2, and custom modules</strong>.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">NLP</span>
+          <span style="background: rgba(139, 92, 246, 0.1); color: var(--accent-secondary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">Transformers</span>
+          <span style="background: rgba(6, 182, 212, 0.1); color: var(--accent-tertiary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">PyPDF2</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+          <i class="fas fa-receipt" style="font-size: 1.5rem; color: var(--accent-tertiary); margin-right: 0.75rem;"></i>
+          <h3>Intelligent Invoice Parser</h3>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Cleaned and engineered an invoice parsing pipeline leveraging <strong>OCR for text extraction and vector embeddings</strong> for semantic entity recognition, integrated with <strong>LangChain</strong> for contextual query resolution.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">OCR</span>
+          <span style="background: rgba(139, 92, 246, 0.1); color: var(--accent-secondary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">Vector Embeddings</span>
+          <span style="background: rgba(6, 182, 212, 0.1); color: var(--accent-tertiary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">LangChain</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+          <i class="fas fa-search" style="font-size: 1.5rem; color: var(--accent-primary); margin-right: 0.75rem;"></i>
+          <h3>RAG-Powered Semantic Search System</h3>
+        </div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Built a comprehensive RAG (Retrieval-Augmented Generation) system with vector embeddings and augmented generation capabilities for intelligent document understanding and contextual responses.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent-primary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">RAG</span>
+          <span style="background: rgba(139, 92, 246, 0.1); color: var(--accent-secondary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">FAISS</span>
+          <span style="background: rgba(6, 182, 212, 0.1); color: var(--accent-tertiary); padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.8rem;">Flask API</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="section animate-on-scroll">
+    <div class="section-header">
+      <div class="section-badge">Education</div>
+      <h2 class="section-title">Academic Background</h2>
+      <p class="section-description">Building strong foundations in computer science and data science</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap;">
+          <div>
+            <h3 style="color: var(--accent-primary); margin-bottom: 0.5rem;">B.Tech (Data Science)</h3>
+            <h4 style="color: var(--text-secondary);">Raj Kumar Goel Institute of Technology, Ghaziabad</h4>
+          </div>
+          <div style="text-align: right;">
+            <span style="background: rgba(124, 58, 237, 0.15); color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(124, 58, 237, 0.3);">77.5%</span>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap;">
+          <div>
+            <h3 style="color: var(--accent-secondary); margin-bottom: 0.5rem;">XII (CBSE)</h3>
+            <h4 style="color: var(--text-secondary);">Sanskrit Public School</h4>
+          </div>
+          <div style="text-align: right;">
+            <span style="background: rgba(6, 182, 212, 0.15); color: #ffffff; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(6, 182, 212, 0.3);">93.2%</span>
+            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem;">2021</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leadership -->
+    <div style="margin-top: 4rem;">
+      <h3 style="color: var(--accent-secondary); margin-bottom: 2rem; text-align: center;">Leadership & Responsibilities</h3>
+      <div class="grid-2">
+        <div class="card">
+          <h4 style="color: var(--accent-primary); margin-bottom: 1rem;"><i class="fas fa-users-cog" style="margin-right: 0.5rem;"></i>Management (Core Member)</h4>
+          <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Data Quest, Technical Society, RKGIT (2023-2026)</strong></p>
+          <p style="color: var(--text-muted);">Organized Power BI and Python workshops, led technical events, and coordinated the team.</p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-tertiary); margin-bottom: 1rem;"><i class="fas fa-futbol" style="margin-right: 0.5rem;"></i>Captain Football Team</h4>
+          <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>Raj Kumar Goel Institute Of Technology (2025-2026)</strong></p>
+          <p style="color: var(--text-muted);">Led team strategy, discipline, and on-field performance in college and zonal level tournaments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section animate-on-scroll">
+    <div class="section-header">
+      <div class="section-badge">Get In Touch</div>
+      <h2 class="section-title">Let's Build Something Amazing</h2>
+      <p class="section-description">Ready to collaborate on cutting-edge AI projects</p>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="text-align: center;">
+        <i class="fas fa-envelope" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1rem;"></i>
+        <h3>Email</h3>
+        <p><a href="mailto:shivam6902@gmail.com" style="color: var(--accent-primary); text-decoration: none;">shivam6902@gmail.com</a></p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <i class="fas fa-phone" style="font-size: 2rem; color: var(--accent-secondary); margin-bottom: 1rem;"></i>
+        <h3>Phone</h3>
+        <p style="color: var(--text-secondary);">(+91) 8543936902</p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <i class="fab fa-github" style="font-size: 2rem; color: var(--accent-tertiary); margin-bottom: 1rem;"></i>
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/ShivamSingh200416" target="_blank" style="color: var(--accent-tertiary); text-decoration: none;">ShivamSingh200416</a></p>
+      </div>
+      <div class="card" style="text-align: center;">
+        <i class="fab fa-linkedin" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 1rem;"></i>
+        <h3>LinkedIn</h3>
+        <p><a href="https://linkedin.com/in/shivam-singh-ml" target="_blank" style="color: var(--accent-primary); text-decoration: none;">Connect with me</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: var(--bg-secondary); padding: 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">&copy; 2025 Shivam Singh. All rights reserved.</p>
+    <p style="color: var(--text-secondary); font-size: 0.9rem;">Built with passion for AI and machine learning</p>
   </footer>
 
   <script>
-    const text = "Data Analyst | ML Engineer | Python | SQL | Power BI | Tableau";
-    let index = 0;
-    function typeText() {
-      const target = document.getElementById("typing-text");
-      if (index < text.length) {
-        target.textContent += text.charAt(index);
-        index++;
-        setTimeout(typeText, 100);
-      }
-    }
+    // Smooth scrolling for navigation links
     document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("typing-text").textContent = "";
-      typeText();
-      const sections = document.querySelectorAll(".section");
-      const revealOnScroll = () => {
-        sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 100) {
-            section.classList.add("visible");
+      // Animate sections on scroll
+      const animatedElements = document.querySelectorAll(".animate-on-scroll");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
           }
         });
-      };
-      window.addEventListener("scroll", revealOnScroll);
-      revealOnScroll();
-      tsParticles.load("tsparticles", {
-        fullScreen: { enable: false },
-        background: { color: "transparent" },
-        particles: {
-          number: { value: 60 },
-          size: { value: 2 },
-          move: { enable: true, speed: 1 },
-          line_linked: { enable: true, distance: 150, color: "#00bcd4", opacity: 0.4, width: 1 },
-          color: { value: "#00bcd4" }
-        },
-        interactivity: {
-          events: { onhover: { enable: true, mode: "repulse" } },
-          modes: { repulse: { distance: 100 } }
+      }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      animatedElements.forEach((el) => observer.observe(el));
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Navbar background on scroll
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.style.background = 'rgba(10, 14, 26, 0.98)';
+          navbar.style.backdropFilter = 'blur(20px)';
+        } else {
+          navbar.style.background = 'rgba(10, 14, 26, 0.95)';
+          navbar.style.backdropFilter = 'blur(20px)';
         }
       });
+
+      // Create additional floating elements dynamically
+      const createFloatingElements = () => {
+        const container = document.querySelector('.floating-elements');
+        for (let i = 0; i < 15; i++) {
+          const element = document.createElement('div');
+          element.className = 'floating-element';
+          element.style.left = Math.random() * 100 + '%';
+          element.style.animationDelay = Math.random() * 20 + 's';
+          element.style.animationDuration = (15 + Math.random() * 15) + 's';
+          container.appendChild(element);
+        }
+      };
+      
+      createFloatingElements();
+
+      // Add typing effect to hero subtitle
+      const heroSubtitle = document.querySelector('.hero-subtitle');
+      const originalText = heroSubtitle.textContent;
+      heroSubtitle.textContent = '';
+      
+      let i = 0;
+      const typeWriter = () => {
+        if (i < originalText.length) {
+          heroSubtitle.textContent += originalText.charAt(i);
+          i++;
+          setTimeout(typeWriter, 100);
+        }
+      };
+      
+      setTimeout(typeWriter, 1000);
+
+      // Add hover effects to cards
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+
+      // Add click ripple effect to buttons
+      const buttons = document.querySelectorAll('.btn');
+      buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+          `;
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add CSS for ripple animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes ripple {
+          to {
+            transform: scale(4);
+            opacity: 0;
+          }
+        }
+        .btn {
+          position: relative;
+          overflow: hidden;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Add parallax effect to hero section
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+          hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+      });
+
+      // Add counter animation for stats (if any)
+      const animateCounters = () => {
+        const counters = document.querySelectorAll('[data-count]');
+        counters.forEach(counter => {
+          const target = parseInt(counter.getAttribute('data-count'));
+          const increment = target / 100;
+          let current = 0;
+          
+          const updateCounter = () => {
+            if (current < target) {
+              current += increment;
+              counter.textContent = Math.ceil(current);
+              setTimeout(updateCounter, 20);
+            } else {
+              counter.textContent = target;
+            }
+          };
+          
+          updateCounter();
+        });
+      };
+
+      // Initialize animations
+      setTimeout(() => {
+        animateCounters();
+      }, 1000);
     });
-    function toggleTheme() {
-      document.body.classList.toggle("light-theme");
+
+    // Add mobile menu toggle (for future enhancement)
+    function toggleMobileMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('mobile-active');
     }
+
+    // Add scroll to top functionality
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.querySelector('.scroll-to-top');
+      if (window.pageYOffset > 300) {
+        if (!scrollTop) {
+          const scrollBtn = document.createElement('button');
+          scrollBtn.className = 'scroll-to-top';
+          scrollBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+          scrollBtn.style.cssText = `
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: var(--shadow-primary);
+          `;
+          scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+          document.body.appendChild(scrollBtn);
+        }
+      } else {
+        const scrollTop = document.querySelector('.scroll-to-top');
+        if (scrollTop) {
+          scrollTop.remove();
+        }
+      }
+    });
   </script>
 </body>
 </html>
